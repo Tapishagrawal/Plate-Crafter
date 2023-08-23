@@ -1,0 +1,23 @@
+.cardMainContainer{
+    width: 80%;
+    margin: auto;
+}
+.homeCardContainer{
+    display: flex;
+    gap: 60px;
+    margin-top: 60px;
+}
+.cardAout{
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+.cardAout > h1{
+    font-size: 22px;
+    font-weight: 600;
+}
+.cardAout > p{
+    font-size: 16px;
+    color: #5a5a5a;
+    margin-top: 10px;
+}

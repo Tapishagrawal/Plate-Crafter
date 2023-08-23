@@ -15,9 +15,9 @@ export default function Slider() {
                 spaceBetween={50}
                 slidesPerView={1}
             >
-                <SwiperSlide><Image src='https://www.xtremz.in/dynamic/images/dynamic_images/3czr.jpg'/></SwiperSlide>
-                <SwiperSlide><Image src='https://www.xtremz.in/dynamic/images/dynamic_images/9NCQ.jpg'/></SwiperSlide>
-                <SwiperSlide><Image src='https://www.xtremz.in/dynamic/images/dynamic_images/7PYr.jpg'/></SwiperSlide>
+                <SwiperSlide><Image src='https://www.xtremz.in/dynamic/images/dynamic_images/3czr.jpg' width={'100%'} /></SwiperSlide>
+                <SwiperSlide><Image src='https://www.xtremz.in/dynamic/images/dynamic_images/9NCQ.jpg' width={'100%'}/></SwiperSlide>
+                <SwiperSlide><Image src='https://www.xtremz.in/dynamic/images/dynamic_images/7PYr.jpg' width={'100%'}/></SwiperSlide>
             </Swiper>
         </>
     );
