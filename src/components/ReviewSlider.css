@@ -1,0 +1,42 @@
+.swiper-button-next{
+    padding: 30px 24px;
+    height: 100px;
+    border-radius: 5px;
+    color: rgb(214, 173, 111);
+    background: #dddddda2;
+    transition: background-color 0.4s ease-in-out;
+
+}
+.swiper-button-next:hover {
+    background: #f7f0e8;
+    padding: 30px 24px;
+    height: 100px;
+    border-radius: 5px;
+}
+.swiper-button-next:hover::after{
+    transform: translateX(6px);
+
+}
+.swiper-button-prev{
+    padding: 30px 24px;
+    height: 100px;
+    border-radius: 5px;
+    color: rgb(214, 173, 111);
+    background: #dddddda2;
+    transition: background-color 0.4s ease-in-out;
+}
+.swiper-button-prev:hover {
+    background: #f7f0e8;
+    padding: 30px 24px;
+    height: 100px;
+    border-radius: 5px;
+}
+.swiper-button-prev:hover::after{
+    transform: translateX(-6px);
+}
+.swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+    width: 51px;
+    height: 5px;
+    border-radius: 2px;
+    background: #ff9e00;
+}
