@@ -1,0 +1,36 @@
+.activeBtnColor {
+    color: white !important;
+    transition: color 0.3s; 
+}
+.defaultBtnColor {
+    color: rgb(246, 188, 80)!important;
+}
+.defaultBtnColor:hover {
+    color: white !important; 
+}
+.humbarIcon{
+    display: none !important;
+}
+.mobileBar{
+    display: block;
+    margin: 10px;
+    padding: 10px;
+    outline: none;
+    border-radius: 3px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+}
+.mobileBar:hover{
+    background-color: rgb(246, 188, 80);
+    color: black;
+}
+@media only screen and (max-width:570px){
+    .humbarIcon{
+        display: initial !important;
+    }
+    .activeBtnColor,
+    .defaultBtnColor{
+        display: none;
+    }
+}
