@@ -7,8 +7,8 @@ import { HamburgerIcon } from '@chakra-ui/icons'
 
 const links = [
     { path: "/", text: "Home" },
-    { path: "/bike-plate", text: "Bike Plates" },
     { path: "/car-plate", text: "Car Plates" },
+    { path: "/bike-plate", text: "Bike Plates" },
     { path: "/registration", text: "Registration" },
 ]
 

@@ -3,7 +3,6 @@ import React, { useEffect, useReducer, useState } from 'react'
 import { fetchData } from '../unit/api'
 import { bikeReducer, initState } from "./bikeRedicer"
 import BikeCard from '../../components/BikeCard'
-import { Link } from 'react-router-dom';
 import LodingSkeleton from '../../components/LodingSkeleton'
 import ErrorMessage from '../../components/ErrorMessage'
 import Pagination from '../../components/Pagination'
@@ -71,9 +70,7 @@ const BikePlate = () => {
                                 {data?.data &&
                                     data?.data.length > 0 &&
                                     data?.data?.map((plate) => (
-                                        <Link>
-                                            <BikeCard key={plate.id} {...plate} />
-                                        </Link>
+                                        <BikeCard key={plate.id} {...plate} />
                                     ))}
                             </Flex>
                         </Box>
