@@ -1,9 +1,9 @@
 import { Box, Button, HStack, Image, Tag, TagLabel, TagLeftIcon, Text, transition } from '@chakra-ui/react'
 import React from 'react'
-import { FaStar, FaHeart, FaRegHeart,FaShoppingCart } from "react-icons/fa";
+import { FaStar, FaRegHeart,FaShoppingCart } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
-const BikeCard = ({id, img, title, price, rating}) => {
+const CarCard = ({id, img, title, price, rating}) => {
     return (
         <>      
             
@@ -16,13 +16,13 @@ const BikeCard = ({id, img, title, price, rating}) => {
                 </Box>
                 <Box marginBlock={2}>
                     <Button marginRight={5} colorScheme='pink' variant={'outline'}><FaRegHeart/></Button>
-                    <Link to={`/bikeProductDetail/${id}`}>
+                    <Link to={`/carProductDetail/${id}`}>
                         <Button colorScheme='teal'><Tag bg={'transparent'} color={'gray.100'}><FaShoppingCart/></Tag> Order Now</Button>
                     </Link>
                 </Box>
                 <HStack marginBlock={5} justify={'center'}>
-                    {new Array(rating).fill(0).map((_,i)=>(
-                        <FaStar key={i+1} color='#FDE10D' />
+                    {new Array(5).fill(0).map((_,i)=>(
+                        <FaStar key={i+1} color={i < rating ? '#FDE10D' : '#D6D6D6'} />
                     ))}
                 </HStack>
             </Box>
@@ -30,4 +30,4 @@ const BikeCard = ({id, img, title, price, rating}) => {
     )
 }
 
-export default BikeCard
+export default CarCard
