@@ -7,7 +7,7 @@ import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import { Box, Flex} from '@chakra-ui/react';
 
-const ProductSlideShow = () => {
+const ProductSlideShow = ({img}) => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
     return (
@@ -25,14 +25,20 @@ const ProductSlideShow = () => {
                         className="mySwiper2"
                     >
                         <SwiperSlide >
-                            <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                            <img width={"100%"} src={img} />
                         </SwiperSlide>
                         <SwiperSlide>
-                            <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                            <img width={"100%"} src={img} />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <img width={"100%"} src={img} />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <img width={"100%"} src={img} />
                         </SwiperSlide>
                     </Swiper>
                 </Box>
-                <Box width={'300px'}>
+                <Box width={'400px'} m={'auto'} mt={2}>
                     <Swiper
                         onSwiper={setThumbsSwiper}
                         spaceBetween={10}
@@ -43,10 +49,16 @@ const ProductSlideShow = () => {
                         className="mySwiper"
                     >
                         <SwiperSlide>
-                            <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                            <img src={img} />
                         </SwiperSlide>
                         <SwiperSlide>
-                            <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                            <img src={img} />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <img src={img} />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <img src={img} />
                         </SwiperSlide>
                     </Swiper>
                 </Box>

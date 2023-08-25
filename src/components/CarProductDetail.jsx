@@ -6,7 +6,7 @@ import { bikeReducer, initState } from '../page/bike-plate/bikeRedicer'
 import ErrorMessage from '../components/ErrorMessage'
 import ProductSlideShow from './ProductSlideShow';
 import { FaCheck, FaStar, FaHeart } from "react-icons/fa6";
-import { color } from 'framer-motion'
+import ReletedProductSlider from './ReletedProductSlider'
 const CarProductDetail = () => {
     const { id } = useParams()
     const [state, dispatch] = useReducer(bikeReducer, initState)
@@ -43,7 +43,7 @@ const CarProductDetail = () => {
     return (
         <>
             <Flex w={"90%"} m={'auto'} mt={20}>
-                <ProductSlideShow />
+                <ProductSlideShow img={img}/>
                 {Object.keys(data).length &&
                     <Box ml={10}>
                         <Heading color={"#D69E2E"}>{title}</Heading>
@@ -68,7 +68,7 @@ const CarProductDetail = () => {
                                 <Button bg={'transparent'} fontWeight={900} _hover={{ background: 'transparent', color:"HSL(353, 72%, 46%)" }} isDisabled={count<=1} p={3} onClick={()=>setcount(count-1)} fontSize={18} >-</Button>
                             </Tag>
                             <Box>
-                                <Button p={6} bg={'black'} color={'white'} _hover={{bg:"#E9B10B"}} borderRadius={2} width={300}>ADD TO CARD</Button>
+                                <Button p={6} fontWeight={500} bg={'black'} color={'white'} _hover={{bg:"#E9B10B"}} borderRadius={2} width={300}>ADD TO CARD</Button>
                             </Box>
                         </Flex>
 
@@ -79,7 +79,22 @@ const CarProductDetail = () => {
                     </Box>
                 }
             </Flex>
-
+            
+            <Heading mt={18} textAlign={'center'} position={"relative"} fontSize={30} fontWeight={500} borderBottom={'1px solid #CBCED1'}>
+                Releted Products
+                <Box
+                as='span'
+                position= "absolute"
+                bottom= "-1px"
+                left= "601px"
+                width= "200px"
+                height= "2px"
+                background-color= "#ff9800"
+                />
+            </Heading>
+            
+            <ReletedProductSlider/>
+            <Box mt={20}></Box>
         </>
     )
 }
