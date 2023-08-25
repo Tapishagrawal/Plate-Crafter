@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Image, Tag, TagLabel, TagLeftIcon, Text, transition } from '@chakra-ui/react'
+import { Box, Button, HStack, Image, Tag, Text} from '@chakra-ui/react'
 import React from 'react'
 import { FaStar, FaHeart, FaRegHeart,FaShoppingCart } from "react-icons/fa";
 import { Link } from 'react-router-dom';

@@ -2,11 +2,12 @@ import { Box, Button, Center, Flex, Grid, GridItem, HStack, Heading, Spinner, Ta
 import React, { useEffect, useReducer, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { singleProductFetchData } from '../page/unit/carApi'
-import { bikeReducer, initState } from '../page/bike-plate/bikeRedicer'
+import { bikeReducer, initState } from '../page/car-plate/carReducer'
 import ErrorMessage from '../components/ErrorMessage'
 import ProductSlideShow from './ProductSlideShow';
 import { FaCheck, FaStar, FaHeart } from "react-icons/fa6";
 import ReletedProductSlider from './ReletedProductSlider'
+import Footer from './Footer'
 const CarProductDetail = () => {
     const { id } = useParams()
     const [state, dispatch] = useReducer(bikeReducer, initState)
@@ -39,7 +40,7 @@ const CarProductDetail = () => {
         return <ErrorMessage />
     }
 
-    const { img, title, price, rating, category, description     } = data
+    const { img, title, price, rating, category, description} = data
     return (
         <>
             <Flex w={"90%"} m={'auto'} mt={20}>
@@ -93,8 +94,9 @@ const CarProductDetail = () => {
                 />
             </Heading>
             
-            <ReletedProductSlider/>
-            <Box mt={20}></Box>
+            <ReletedProductSlider category={category}/>
+
+            <Footer/>
         </>
     )
 }

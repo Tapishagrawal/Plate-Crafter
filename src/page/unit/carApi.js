@@ -19,3 +19,10 @@ export const singleProductFetchData = (id) =>{
         method:"get"
     })
 }
+
+export const FetchSliderData = (url, category) => {
+    return axios({
+        url:`${url}?category=${category}`,
+        method:"get"
+    })
+}

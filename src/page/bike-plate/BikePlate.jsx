@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Grid, GridItem, HStack, Select, Spinner, Text } from '@chakra-ui/react'
 import React, { useEffect, useReducer, useState } from 'react'
-import { fetchData } from '../unit/api'
+import { fetchData } from '../unit/bikeApi'
 import { bikeReducer, initState } from "./bikeRedicer"
 import BikeCard from '../../components/BikeCard'
 import LodingSkeleton from '../../components/LodingSkeleton'
