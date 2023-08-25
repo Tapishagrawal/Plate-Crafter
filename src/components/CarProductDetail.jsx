@@ -1,4 +1,15 @@
-import { Box, Button, Center, Flex, Grid, GridItem, HStack, Heading, Spinner, Table, Tag, TagLabel, Text, Tr } from '@chakra-ui/react'
+import { 
+    Box, 
+    Button, 
+    Center, 
+    Flex, 
+    HStack, 
+    Heading, 
+    Spinner, 
+    Tag, 
+    TagLabel, 
+    Text, 
+} from '@chakra-ui/react'
 import React, { useEffect, useReducer, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { singleProductFetchData } from '../page/unit/carApi'
@@ -8,6 +19,7 @@ import ProductSlideShow from './ProductSlideShow';
 import { FaCheck, FaStar, FaHeart } from "react-icons/fa6";
 import ReletedProductSlider from './ReletedProductSlider'
 import Footer from './Footer'
+const URL = `https://platecrafters-moke-api.onrender.com/carPlates`
 const CarProductDetail = () => {
     const { id } = useParams()
     const [state, dispatch] = useReducer(bikeReducer, initState)
@@ -94,7 +106,7 @@ const CarProductDetail = () => {
                 />
             </Heading>
             
-            <ReletedProductSlider category={category}/>
+            <ReletedProductSlider category={category} URL={URL}/>
 
             <Footer/>
         </>
