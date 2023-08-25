@@ -3,6 +3,7 @@ import Slider from "../../components/Slider"
 import styles from './Home.module.css'
 import ReviewSlider from "../../components/ReviewSlider"
 import { PhoneIcon } from "@chakra-ui/icons"
+import Footer from "../../components/Footer"
 
 const Home = () => {
     return (
@@ -30,10 +31,10 @@ const Home = () => {
 
             {/*Premium PLates Section Start*/}
             <Box>
-                <Flex mt={20} direction={{base:"column",md:"row"}} justify={"center"} align={'center'}>
-                    
+                <Flex mt={20} direction={{ base: "column", md: "row" }} justify={"center"} align={'center'}>
+
                     <Box width={"49%"}>
-                        <Image w={"90%"} src={'https://allbikehere.com/wp-content/uploads/2021/05/maxresdefault-12.jpg'}/>
+                        <Image w={"90%"} src={'https://allbikehere.com/wp-content/uploads/2021/05/maxresdefault-12.jpg'} />
                     </Box>
                     <Box width={"49%"}>
                         <Text fontSize={"15px"} fontWeight={500} color={"#709255"}>Service</Text>
@@ -42,12 +43,12 @@ const Home = () => {
                         <Button colorScheme="yellow" marginRight={2}>Order Now</Button>
                         <Button colorScheme="yellow" variant="outline">Learn More</Button>
                     </Box>
-                    
+
                 </Flex>
             </Box>
             {/*Premium PLates Section End*/}
-            
-            
+
+
             {/*Custum Plate Section Start*/}
             <Box mt={50}>
                 <Container maxW={"1320px"} margin={"auto"}>
@@ -81,42 +82,10 @@ const Home = () => {
                         <Text maxW={"2xl"} textAlign={"center"} m={"auto"} mt={5} >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque consequuntur praesentium, quaerat ipsum, qui iure obcaecati neque dicta magni </Text>
                     </Box>
                 </Container>
-                <ReviewSlider/>
+                <ReviewSlider />
             </Box>
 
-            <Box bg={"blackAlpha.800"} paddingBlock={35} mt={10}>
-                <Container maxW={"1330px"}>
-                    <Flex gap={20}>
-                        <Box flex={2}>
-                            <Heading as='h3' color={"white"} fontSize={25}>Plate Crafters</Heading>
-                            <Text w={"70%"} color={"whiteAlpha.700"} marginBlock={5}>Lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. dolor sit amet consectetur adipisicing elit. Quam atque dolor maiores minima aperiam sit!</Text>
-                            <Flex align={'center'}>
-                                <Image w={"100px"} src="https://www.freepnglogos.com/uploads/play-store-logo-png/play-store-logo-nisi-filters-australia-11.png" />
-                                <Image w={40} src="https://www.freepnglogos.com/uploads/app-store-logo-png/download-on-the-app-store-logo-png-23.png" />
-                            </Flex>
-                        </Box>
-                        <Box flex={1}>
-                            <Heading as='h3' color={"white"} fontSize={25} marginBottom={5}>Plate Crafters</Heading>
-                            <VStack align={"flex-start"} color={"whiteAlpha.600"} fontSize={14}>
-                                <Link>Certifitations</Link>
-                                <Link>Privacy Policy</Link>
-                                <Link>Terms of Service</Link>
-                                <Link>Acceptable Use Policy</Link>
-                                <Link>Information security Policy</Link>
-                                <Link>Login</Link>
-                            </VStack>
-                        </Box>
-                        <Box flex={1}>
-                            <Heading as='h3' color={"white"} fontSize={25} marginBottom={5}>Plate Crafters</Heading>
-                            <VStack align={"flex-start"} color={"whiteAlpha.600"} fontSize={14}>
-                                <Text><PhoneIcon borderRadius={50} fontSize={25} padding={1} color={"black"} backgroundColor={'#c4a76deb'}/> +91 9865988754</Text>
-                                <Text><PhoneIcon borderRadius={50} fontSize={25} padding={1} color={"black"} backgroundColor={'#c4a76deb'}/> +91 9865988754</Text>
-                                <Text><PhoneIcon borderRadius={50} fontSize={25} padding={1} color={"black"} backgroundColor={'#c4a76deb'}/> +91 9865988754</Text>
-                            </VStack>
-                        </Box>
-                    </Flex>
-                </Container>
-            </Box>
+            <Footer />
 
         </>
     )
