@@ -12,3 +12,10 @@ export const fetchData = (params={}) =>{
         }
     })
 }
+
+export const singleProductFetchData = (id) =>{
+    return axios({
+        url:`https://platecrafters-moke-api.onrender.com/bikePlates/${id}`,
+        method:"get"
+    })
+}

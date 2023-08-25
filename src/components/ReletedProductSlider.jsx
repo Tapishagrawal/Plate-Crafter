@@ -18,12 +18,12 @@ import { useEffect } from 'react';
 import CarCard from './CarCard';
 import { FaStar } from 'react-icons/fa6';
 
-export default function ReletedProductSlider({ category }) {
+export default function ReletedProductSlider({ category, URL }) {
     const [swiperRef, setSwiperRef] = useState(null);
     const [sliderProductdata, setSliderProductData] = useState([]);
-    const getSliderProductData = async (url, category) => {
+    const getSliderProductData = async (URL, category) => {
         try {
-            let res = await FetchSliderData(url, category);
+            let res = await FetchSliderData(URL, category);
             setSliderProductData(res)
         } catch (error) {
             console.log(error)
@@ -32,9 +32,9 @@ export default function ReletedProductSlider({ category }) {
 
     useEffect(() => {
         getSliderProductData(
-            `https://platecrafters-moke-api.onrender.com/carPlates`,
+            URL,
             category)
-    }, [category])
+    }, [URL, category])
     return (
         <>
             <div style={{ width: "80%", margin: "auto", marginTop: "60px" }}>

@@ -58,7 +58,6 @@ const BikePlate = () => {
                             </HStack>
                         </HStack>
                         <Box mt={10} p={10}>
-                            <></>
                             <Pagination page={page} totalPage={totalPage} handleChnagePage={handleChnagePage}/>
 
                             <Flex wrap={'wrap'} justify={'space-around'}>
