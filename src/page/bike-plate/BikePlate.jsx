@@ -16,8 +16,8 @@ const BikePlate = () => {
     const [state, dispatch] = useReducer(bikeReducer, initState);
     const { data, isLoading, isError } = state;
 
-    const handleChnagePage = (data) =>{
-        setpage(data.selected+1)
+    const handleChnagePage = (i) =>{
+        setpage(i)
     }
 
     const getData = async (sortBy,orderBy, page, limit) => {
