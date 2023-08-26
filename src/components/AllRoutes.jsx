@@ -6,6 +6,9 @@ import CarPlate from '../page/car-plate/CarPlate'
 import Registration from '../page/registration/Registration'
 import CarProductDetail from './CarProductDetail'
 import BikeProductDetail from './BikeProductDetail'
+import WishList from '../page/wishList/WishList'
+import Login from '../page/login/Login'
+import PrivateRoute from './PrivateRoute'
 
 
 const AllRoutes = () => {
@@ -15,6 +18,12 @@ const AllRoutes = () => {
             <Route path='/bike-plate' element={<BikePlate/>} />
             <Route path='/car-plate' element={<CarPlate/>} />
             <Route path='/registration' element={<Registration/>} />
+            <Route path='/wish-list' element={
+                <PrivateRoute>
+                    <WishList/>
+                </PrivateRoute>
+            } />
+            <Route path='/login' element={<Login/>} />
             <Route path='/bikeProductDetail/:id' element={<BikeProductDetail />} />
             <Route path='/carProductDetail/:id' element={<CarProductDetail/>} />
         </Routes>

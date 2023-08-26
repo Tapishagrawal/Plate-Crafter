@@ -3,12 +3,21 @@ import {
     Button, 
     Center, 
     Flex, 
+    FormControl, 
+    FormLabel, 
     HStack, 
     Heading, 
+    Input, 
+    NumberDecrementStepper, 
+    NumberIncrementStepper, 
+    NumberInput, 
+    NumberInputField, 
+    NumberInputStepper, 
     Spinner, 
     Tag, 
     TagLabel, 
     Text, 
+    Textarea, 
     Tr 
 } 
 from '@chakra-ui/react'
@@ -21,6 +30,7 @@ import ProductSlideShow from './ProductSlideShow';
 import { FaCheck, FaStar, FaHeart } from "react-icons/fa6";
 import ReletedProductSlider from './ReletedProductSlider'
 import Footer from './Footer'
+import ReviewSlider from './ReviewSlider'
 
 const URL = `https://platecrafters-moke-api.onrender.com/bikePlates`
 const BikeProductDetail = () => {
@@ -28,6 +38,12 @@ const BikeProductDetail = () => {
     const [state, dispatch] = useReducer(bikeReducer, initState)
     const [count,setcount] = useState(1)
     const { data, isLoading, isError } = state
+    const [reviewNameinput, setreviewNameinput] = useState('')
+    const [reviewImginput, setreviewImginput] = useState('')
+    const [reviewRatinginput, setreviewRatinginput] = useState('')
+    const [reviewDescinput, setreviewDescinput] = useState('')
+    const [sumitedFormData, setSumitedFormData] = useState("")
+    const [reviewData, setReviewData] = useState([])
 
     const fetchData = async (id) => {
         dispatch({ type: "LOEADING_STATUS" })
@@ -110,6 +126,58 @@ const BikeProductDetail = () => {
             </Heading>
             
             <ReletedProductSlider category={category} URL={URL}/>
+
+            <Heading mt={18} textAlign={'center'} position={"relative"} fontSize={30} fontWeight={500} borderBottom={'1px solid #CBCED1'}>
+                FeedBack
+                <Box
+                    as='span'
+                    position="absolute"
+                    bottom="-1px"
+                    left="601px"
+                    width="200px"
+                    height="2px"
+                    background-color="#ff9800"
+                />
+            </Heading>
+
+            <ReviewSlider />
+
+            <Box mt={20}>
+                <form >
+                    <FormControl width={700} m={'auto'}>
+                        <Box>
+                            <FormLabel>Name</FormLabel>
+                            <Input type='text' value={reviewNameinput} onChange={e => setreviewNameinput(e.target.value)} />
+                        </Box>
+                        <Box mt={5}>
+                            <FormLabel>Image</FormLabel>
+                            <input type='file' value={reviewImginput} onChange={e => setreviewImginput(e.target.value)} />
+                        </Box>
+                        <Box mt={5}>
+                            <FormLabel>Rating</FormLabel>
+                            <NumberInput max={5} min={1} value={reviewRatinginput} onChange={newValue => {
+                                const sanitizedValue = Math.min(newValue, 5);
+                                setreviewRatinginput(sanitizedValue);
+                            }} >
+                                <NumberInputField />
+                                <NumberInputStepper>
+                                    <NumberIncrementStepper />
+                                    <NumberDecrementStepper />
+                                </NumberInputStepper>
+                            </NumberInput>
+                        </Box>
+                        <Box mt={5}>
+                            <FormLabel>Your Review</FormLabel>
+                            <Textarea onChange={e => setreviewDescinput(e.target.value)} placeholder="Write your message" value={reviewDescinput} />
+
+                        </Box>
+                        <Box w={"29%"} m={'auto'} mt={15}>
+                            <Button p={6} fontWeight={500} w={200} bg={'black'} color={'white'} _hover={{ bg: "#E9B10B" }} borderRadius={2} type='submit'>SUBMIT</Button>
+                        </Box>
+                    </FormControl>
+                </form>
+            </Box>
+
             <Box marginBlock={50}></Box>
             <Footer/>
         </>
