@@ -75,14 +75,16 @@ const Home = () => {
             {/*Custum Plate Section End*/}
 
 
-            <Box mt={50}>
+            <Box marginBlock={50}>
                 <Container maxW={"1320px"} margin={"auto"}>
                     <Box>
                         <Heading textAlign={"center"} color={"#F59B00"} >What Our Customer Say</Heading>
                         <Text maxW={"2xl"} textAlign={"center"} m={"auto"} mt={5} >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque consequuntur praesentium, quaerat ipsum, qui iure obcaecati neque dicta magni </Text>
                     </Box>
                 </Container>
+
                 <ReviewSlider />
+                
             </Box>
 
             <Footer />

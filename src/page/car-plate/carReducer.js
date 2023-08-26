@@ -3,7 +3,7 @@ export const initState = {
     isLoading: false,
     isError: false,
 }
-export const bikeReducer = (state, { type, payload }) => {
+export const carReducer = (state, { type, payload }) => {
     switch (type) {
         case "FETCHING_DATA_SUCCESS": {
             return {
@@ -25,6 +25,16 @@ export const bikeReducer = (state, { type, payload }) => {
                 isLoading: false,
                 isError: true,
             }
+        }
+    }
+}
+
+
+export const filterCardReducer = (state, {type,payload}) =>{
+
+    switch(type){
+        case "PRICE_FILTER_CHANGE":{
+            return state = payload
         }
     }
 }
