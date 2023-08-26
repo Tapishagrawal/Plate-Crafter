@@ -15,7 +15,7 @@ from '@chakra-ui/react'
 import React, { useEffect, useReducer, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { singleProductFetchData } from '../page/unit/bikeApi'
-import { bikeReducer, initState } from '../page/car-plate/carReducer'
+import { bikeReducer, initState } from '../page/bike-plate/bikeRedicer'
 import ErrorMessage from '../components/ErrorMessage'
 import ProductSlideShow from './ProductSlideShow';
 import { FaCheck, FaStar, FaHeart } from "react-icons/fa6";
@@ -110,7 +110,7 @@ const BikeProductDetail = () => {
             </Heading>
             
             <ReletedProductSlider category={category} URL={URL}/>
-
+            <Box marginBlock={50}></Box>
             <Footer/>
         </>
     )

@@ -13,7 +13,7 @@ import {
 import React, { useEffect, useReducer, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { singleProductFetchData } from '../page/unit/carApi'
-import { bikeReducer, initState } from '../page/car-plate/carReducer'
+import {carReducer, initState } from '../page/car-plate/carReducer'
 import ErrorMessage from '../components/ErrorMessage'
 import ProductSlideShow from './ProductSlideShow';
 import { FaCheck, FaStar, FaHeart } from "react-icons/fa6";
@@ -22,7 +22,7 @@ import Footer from './Footer'
 const URL = `https://platecrafters-moke-api.onrender.com/carPlates`
 const CarProductDetail = () => {
     const { id } = useParams()
-    const [state, dispatch] = useReducer(bikeReducer, initState)
+    const [state, dispatch] = useReducer(carReducer, initState)
     const [count,setcount] = useState(1)
     const { data, isLoading, isError } = state
 
@@ -54,7 +54,7 @@ const CarProductDetail = () => {
 
     const { img, title, price, rating, category, description} = data
     return (
-        <>
+        <Box>
             <Flex w={"90%"} m={'auto'} mt={20}>
                 <ProductSlideShow img={img}/>
                 {Object.keys(data).length &&
@@ -107,9 +107,11 @@ const CarProductDetail = () => {
             </Heading>
             
             <ReletedProductSlider category={category} URL={URL}/>
-
-            <Footer/>
-        </>
+            
+            <Box marginBlock={50}></Box>
+                <Footer/>
+            
+        </Box>
     )
 }
 

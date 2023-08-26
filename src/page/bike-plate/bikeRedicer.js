@@ -28,3 +28,12 @@ export const bikeReducer = (state, { type, payload }) => {
         }
     }
 }
+
+export const filterBikeReducer = (state, {type,payload}) =>{
+
+    switch(type){
+        case "PRICE_FILTER_CHANGE":{
+            return state = payload
+        }
+    }
+}

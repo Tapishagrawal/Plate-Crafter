@@ -14,7 +14,7 @@ import React from 'react'
 
 const Footer = () => {
     return (
-        <Box bg={"blackAlpha.800"} paddingBlock={35} mt={10}>
+        <Box bg={"blackAlpha.800"} paddingBlock={35}>
             <Container maxW={"1330px"}>
                 <Flex gap={20}>
                     <Box flex={2}>
