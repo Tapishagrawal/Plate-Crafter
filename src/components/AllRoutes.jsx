@@ -9,6 +9,9 @@ import BikeProductDetail from './BikeProductDetail'
 import WishList from '../page/wishList/WishList'
 import Login from '../page/login/Login'
 import PrivateRoute from './PrivateRoute'
+import CustomPlate from '../page/custom-plate/CustomPlate'
+import AddCard from '../page/addCard/AddCard'
+
 
 
 const AllRoutes = () => {
@@ -23,7 +26,13 @@ const AllRoutes = () => {
                     <WishList/>
                 </PrivateRoute>
             } />
+            <Route path='/custom-plate' element={
+                <PrivateRoute>
+                    <CustomPlate/>
+                </PrivateRoute>
+            } />
             <Route path='/login' element={<Login/>} />
+            <Route path='/add-card' element={<AddCard/>} />
             <Route path='/bikeProductDetail/:id' element={<BikeProductDetail />} />
             <Route path='/carProductDetail/:id' element={<CarProductDetail/>} />
         </Routes>

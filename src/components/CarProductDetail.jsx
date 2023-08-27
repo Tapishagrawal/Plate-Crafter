@@ -4,8 +4,6 @@ import {
     Center,
     Flex,
     FormControl,
-    FormErrorMessage,
-    FormHelperText,
     FormLabel,
     HStack,
     Heading,
@@ -15,15 +13,25 @@ import {
     NumberInput,
     NumberInputField,
     NumberInputStepper,
+    Popover,
+    PopoverBody,
+    PopoverCloseButton,
+    PopoverContent,
+    PopoverTrigger,
+    Portal,
     Spinner,
     Tag,
     TagLabel,
     Text,
     Textarea,
-    VStack,
-} from '@chakra-ui/react'
-import React, { useEffect, useReducer, useState } from 'react'
-import { useParams } from 'react-router-dom'
+    useToast,
+    PopoverHeader,
+    PopoverFooter,
+    Image,
+} from '@chakra-ui/react';
+import { FaBagShopping } from "react-icons/fa6";
+import React, { useEffect, useReducer, useRef, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { singleProductFetchData } from '../page/unit/carApi'
 import { carReducer, initState } from '../page/car-plate/carReducer'
 import ErrorMessage from '../components/ErrorMessage'
@@ -32,21 +40,27 @@ import { FaCheck, FaStar, FaHeart } from "react-icons/fa6";
 import ReletedProductSlider from './ReletedProductSlider';
 import Footer from './Footer'
 import ReviewSlider from './ReviewSlider'
-import { fetchCustomerReviewData } from '../page/home/homeApi';
 
 const URL = `https://platecrafters-moke-api.onrender.com/carPlates`
+
+const getLocalData = JSON.parse(localStorage.getItem("pruductData")) || []
+
+const getWishListData = JSON.parse(localStorage.getItem("wish-list")) || []
+
 const CarProductDetail = () => {
     const { id } = useParams()
     const [state, dispatch] = useReducer(carReducer, initState)
-    const [count, setcount] = useState(1)
+    const [quantityCount, setQuantity] = useState(getLocalData.length > 0 ? getLocalData[0].quantity : 1)
     const { data, isLoading, isError } = state;
     const [reviewNameinput, setreviewNameinput] = useState('')
     const [reviewImginput, setreviewImginput] = useState('')
     const [reviewRatinginput, setreviewRatinginput] = useState('')
     const [reviewDescinput, setreviewDescinput] = useState('')
-    const [sumitedFormData, setSumitedFormData] = useState("")
-    const [reviewData, setReviewData] = useState([])
-
+    const navigate = useNavigate()
+    const [bagQuantity, setBagQuantity] = useState(0)
+    const toast = useToast()
+    const [addToWishList, setAddToWishList] = useState(false)
+    const initRef = useRef()
 
     const fetchData = async (id) => {
         dispatch({ type: "LOEADING_STATUS" })
@@ -59,20 +73,65 @@ const CarProductDetail = () => {
         }
 
     }
-    const getData = async (URL) => {
-        try {
-            let res = await fetchCustomerReviewData(URL)
-            setReviewData(res)
-        } catch (error) {
-            console.log(error)
+
+    const handleAddCard = () => {
+        const isDuplicate = getLocalData.some(existId => id === existId.id)
+        if (!isDuplicate) {
+            toast({
+                title: `Product Added`,
+                position: "top",
+                isClosable: true,
+                status: "success"
+            })
+
+            setBagQuantity(bagQuantity + 1)
+            state.data.id = id;
+            state.data.quantity = quantityCount
+            getLocalData.push(state.data)
+            localStorage.setItem("pruductData", JSON.stringify(getLocalData))
+        } else {
+            toast({
+                title: `This Product Is Already Added.`,
+                position: "top",
+                isClosable: true,
+                status: "info"
+            })
         }
     }
+    const handleBuyNow = () => {
+        console.log('click buy button')
+        navigate("/custom-plate")
+    }
 
+    const handleAddIntoWishList = () => {
+        const isDuplicate = getWishListData.some(existId => id === existId.id)
+        if (!isDuplicate || !addToWishList) {
+            toast({
+                title: `Added Into Wishlist.`,
+                position: "top",
+                isClosable: true,
+                status: "success"
+            })
+            getWishListData.push(state.data)
+            state.data.id = id
+            localStorage.setItem("wish-list", JSON.stringify(getWishListData))
+            setAddToWishList(!addToWishList)
+        } else if (isDuplicate) {
+            toast({
+                title: `Remove Prodcut.`,
+                position: "top",
+                isClosable: true,
+                status: "error"
+            })
+            const updatedWishlist = getWishListData.filter(item => item.id !== id);
+            localStorage.setItem("wish-list", JSON.stringify(updatedWishlist));
+            setAddToWishList(!addToWishList);
+        }
+    }
 
     useEffect(() => {
         fetchData(id)
     }, [id])
-
 
     if (isLoading) {
         return (
@@ -81,13 +140,114 @@ const CarProductDetail = () => {
             </Center>
         )
     }
+
     if (isError) {
         return <ErrorMessage />
     }
+    let totalAmount = getLocalData.reduce((total, curr) => {
+        return total + (curr.price * curr.quantity);
+    }, 0);
 
-    const { img, title, price, rating, category, description } = data
+    let { img, title, price, rating, category, description, quantity } = data
     return (
         <Box>
+            <Popover closeOnBlur={false} placement='top' initialFocusRef={initRef}>
+                {({ isOpen, onClose }) => (
+                    <>
+                        <Box position={'relative'}>
+                            <PopoverTrigger>
+                                <Box
+                                    position={'fixed'}
+                                    zIndex={1}
+                                    top={560}
+                                    right={10}
+                                    w={"50px"}
+                                    h={"50px"}
+                                    bg={'#000'}
+                                    display={'flex'}
+                                    justifyContent={'center'}
+                                    alignItems={'center'}
+                                    borderRadius={50}
+                                    _hover={{ bg: "#28A871" }}
+                                    transition={"all 0.3s ease-in-out"}
+                                    cursor={'pointer'}
+
+                                >
+                                    <Box position={'relative'}>
+                                        <Box
+                                            position={'fixed'}
+                                            bg="red.500"
+                                            bottom={"56px"}
+                                            right={"48px"}
+                                            p={"0px 6px"}
+                                            fontSize={"11px"}
+                                            fontWeight={600}
+                                            color={"whitesmoke"}
+                                            borderRadius={50}
+                                        >
+                                            {getLocalData.length > 0 && getLocalData.length}
+                                        </Box>
+                                        <FaBagShopping style={{ fontSize: "1.3rem", color: "#fff" }} />
+                                    </Box>
+                                </Box>
+                            </PopoverTrigger>
+                            <Portal>
+                                <PopoverContent>
+                                    <PopoverHeader>Cart</PopoverHeader>
+                                    <PopoverCloseButton />
+                                    <PopoverBody h={"400px"} overflowY={'scroll'}>
+                                        {getLocalData.map(item => (
+                                            <Flex gap={5} alignItems={'center'} marginBlock={5}>
+                                                <Box>
+                                                    <Image w={100} src={item.img} />
+                                                </Box>
+                                                <Box>
+                                                    <Link to={`/carProductDetail/${item.id}`} >
+                                                        <Text _hover={{ color: "yellow.500" }} fontSize={"16px"} color={"gray.500"} fontWeight={500}>{item.title}</Text>
+                                                    </Link>
+                                                    <Text fontSize={"16px"} color={"gray.500"} fontWeight={500}>{item.quantity} X &#8377;{item.price}</Text>
+                                                </Box>
+                                                <Text cursor={'pointer'} onClick={() => {
+                                                    const updatedLocallist = getLocalData.filter(item => item.id !== id);
+                                                    localStorage.setItem("pruductData", JSON.stringify(updatedLocallist));
+                                                    
+                                                }}>x</Text>
+                                            </Flex>
+                                        ))}
+                                    </PopoverBody>
+                                    <PopoverFooter>
+                                        <HStack justify={'space-around'}>
+                                            <Text fontWeight={500} color={"gray.500"}>Total Amount: </Text>
+                                            <Text color={"#56B482"} fontWeight={600} as={"span"}>&#8377;{totalAmount}</Text>
+                                        </HStack>
+                                    </PopoverFooter>
+                                    <PopoverFooter>
+                                        <Button
+                                            m={4}
+                                            colorScheme='teal'
+                                            onClick={onClose}
+                                            ref={initRef}
+                                        >
+                                            Close
+                                        </Button>
+                                        <Button
+                                            m={4}
+                                            colorScheme='teal'
+                                            as={Link}
+                                            to="/add-card"
+                                            ref={initRef}
+                                        >
+                                            View Card
+                                        </Button>
+                                    </PopoverFooter>
+                                </PopoverContent>
+                            </Portal>
+                        </Box>
+
+                    </>
+                )}
+            </Popover>
+
             <Flex w={"90%"} m={'auto'} mt={20}>
                 <ProductSlideShow img={img} />
                 {Object.keys(data).length &&
@@ -109,18 +269,96 @@ const CarProductDetail = () => {
                         </HStack>
                         <Flex gap={2} marginBlock={3}>
                             <Tag>
-                                <Button bg={'transparent'} fontWeight={900} _hover={{ background: 'transparent', color: "HSL(143, 72%, 46%)" }} p={3} onClick={() => setcount(count + 1)} fontSize={18} _disabled={count > 5} >+</Button>
-                                <TagLabel p={3} fontSize={18} borderLeft={'1px solid #333'} borderRight={'1px solid #333'}>{count}</TagLabel>
-                                <Button bg={'transparent'} fontWeight={900} _hover={{ background: 'transparent', color: "HSL(353, 72%, 46%)" }} isDisabled={count <= 1} p={3} onClick={() => setcount(count - 1)} fontSize={18} >-</Button>
+                                <Button
+                                    bg={'transparent'}
+                                    fontWeight={900}
+                                    _hover={{
+                                        background: 'transparent',
+                                        color: "HSL(143, 72%, 46%)"
+                                    }}
+                                    p={3}
+                                    onClick={() => {
+                                        setQuantity(quantityCount + 1)
+                                        const updatedData = [...getLocalData];
+                                        if (updatedData.length > 0) {
+                                            updatedData[0].quantity = quantityCount + 1;
+                                            localStorage.setItem("pruductData", JSON.stringify(updatedData));
+                                        }
+                                    }}
+                                    fontSize={18}
+                                    _disabled={quantityCount > 5}
+                                >+</Button>
+
+                                <TagLabel
+                                    p={3}
+                                    fontSize={18}
+                                    borderLeft={'1px solid #333'}
+                                    borderRight={'1px solid #333'}
+                                >{quantityCount}</TagLabel>
+
+                                <Button
+                                    bg={'transparent'}
+                                    fontWeight={900}
+                                    _hover={{
+                                        background: 'transparent',
+                                        color: "HSL(353, 72%, 46%)"
+                                    }}
+                                    isDisabled={quantityCount <= 1}
+                                    p={3}
+                                    onClick={() => {
+                                        setQuantity(quantityCount - 1)
+                                        const updatedData = [...getLocalData];
+                                        if (updatedData.length > 0) {
+                                            updatedData[0].quantity = quantityCount - 1;
+                                            localStorage.setItem("pruductData", JSON.stringify(updatedData));
+                                        }
+                                    }}
+                                    fontSize={18}
+                                >-</Button>
                             </Tag>
                             <Box>
-                                <Button p={6} fontWeight={500} bg={'black'} color={'white'} _hover={{ bg: "#E9B10B" }} borderRadius={2} width={300}>ADD TO CARD</Button>
+                                <Button
+                                    p={6}
+                                    fontWeight={500}
+                                    bg={'black'}
+                                    color={'white'}
+                                    _hover={{ bg: "#E9B10B" }}
+                                    borderRadius={2}
+                                    width={200}
+                                    onClick={handleAddCard}
+                                >ADD TO CARD</Button>
+                            </Box>
+                            <Box>
+                                <Button
+                                    p={6}
+                                    fontWeight={500}
+                                    bg={'black'}
+                                    color={'white'}
+                                    _hover={{ bg: "#28A871" }}
+                                    borderRadius={2}
+                                    width={200}
+                                    onClick={handleBuyNow}
+                                >BUY NOW</Button>
                             </Box>
                         </Flex>
 
                         <Text color={'gray'} fontSize={16} lineHeight={7}>{description}</Text>
 
-                        <Box marginBlock={7} color={'#4A5568'} transition={"color 0.2s"} _hover={{ color: "#E9B10B", cursor: "pointer" }}><FaHeart style={{ display: "inline", marginRight: "5px" }} /> <span style={{ fontSize: "15px", fontWeight: 500 }}>Add to Wishlist</span></Box>
+                        <Box
+                            display={'inline-block'}
+                            marginBlock={7}
+                            // '#4A5568'
+                            color={addToWishList && getWishListData.some(existId => id === existId.id) ? "red" : '#4A5568'}
+                            transition={"color 0.2s"}
+                            _hover={{
+                                color: "#E9B10B",
+                                cursor: "pointer"
+                            }}
+                            onClick={handleAddIntoWishList}
+                        >
+                            <FaHeart style={{ display: "inline", marginRight: "5px" }} />
+                            <span style={{ fontSize: "15px", fontWeight: 500 }}>Add to Wishlist</span>
+                        </Box>
                         <Text color={"RGBA(0, 0, 0, 0.48)"}>Deliver Charges: RS.49</Text>
                     </Box>
                 }
