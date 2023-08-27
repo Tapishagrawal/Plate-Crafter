@@ -48,9 +48,10 @@ const getLocalData = JSON.parse(localStorage.getItem("pruductData")) || []
 const getWishListData = JSON.parse(localStorage.getItem("wish-list")) || []
 
 const CarProductDetail = () => {
+    const [localData, setLocalData] = useState(getLocalData);
     const { id } = useParams()
     const [state, dispatch] = useReducer(carReducer, initState)
-    const [quantityCount, setQuantity] = useState(getLocalData.length > 0 ? getLocalData[0].quantity : 1)
+    const [quantityCount, setQuantity] = useState(localData.find(item=> item.id === id)?.quantity || 1)
     const { data, isLoading, isError } = state;
     const [reviewNameinput, setreviewNameinput] = useState('')
     const [reviewImginput, setreviewImginput] = useState('')
@@ -75,7 +76,7 @@ const CarProductDetail = () => {
     }
 
     const handleAddCard = () => {
-        const isDuplicate = getLocalData.some(existId => id === existId.id)
+        const isDuplicate = localData.some(existId => id === existId.id)
         if (!isDuplicate) {
             toast({
                 title: `Product Added`,
@@ -85,10 +86,16 @@ const CarProductDetail = () => {
             })
 
             setBagQuantity(bagQuantity + 1)
-            state.data.id = id;
-            state.data.quantity = quantityCount
-            getLocalData.push(state.data)
-            localStorage.setItem("pruductData", JSON.stringify(getLocalData))
+            const updatedLocalData = [
+                ...localData,
+                {
+                    ...state.data,
+                    id: id,
+                    quantity: quantityCount
+                }
+            ];
+            localStorage.setItem("pruductData", JSON.stringify(updatedLocalData))
+            setLocalData(updatedLocalData)
         } else {
             toast({
                 title: `This Product Is Already Added.`,
@@ -99,8 +106,8 @@ const CarProductDetail = () => {
         }
     }
     const handleBuyNow = () => {
-        console.log('click buy button')
-        navigate("/custom-plate")
+            console.log('click buy button')
+            navigate("/custom-plate")
     }
 
     const handleAddIntoWishList = () => {
@@ -129,8 +136,21 @@ const CarProductDetail = () => {
         }
     }
 
+    const handleDeleteProduct = (id) => {
+        const updatedLocallist = localData.filter(item => item.id !== id);
+        localStorage.setItem("pruductData", JSON.stringify(updatedLocallist));
+        setLocalData(updatedLocallist);
+
+    }
+
     useEffect(() => {
+
+        const updatedLocalData = JSON.parse(localStorage.getItem("pruductData")) || [];
+        setLocalData(updatedLocalData);
+        setQuantity(1)
+
         fetchData(id)
+
     }, [id])
 
     if (isLoading) {
@@ -144,7 +164,7 @@ const CarProductDetail = () => {
     if (isError) {
         return <ErrorMessage />
     }
-    let totalAmount = getLocalData.reduce((total, curr) => {
+    let totalAmount = localData.reduce((total, curr) => {
         return total + (curr.price * curr.quantity);
     }, 0);
 
@@ -185,7 +205,7 @@ const CarProductDetail = () => {
                                             color={"whitesmoke"}
                                             borderRadius={50}
                                         >
-                                            {getLocalData.length > 0 && getLocalData.length}
+                                            {localData.length > 0 && localData.length}
                                         </Box>
                                         <FaBagShopping style={{ fontSize: "1.3rem", color: "#fff" }} />
                                     </Box>
@@ -195,8 +215,8 @@ const CarProductDetail = () => {
                                 <PopoverContent>
                                     <PopoverHeader>Cart</PopoverHeader>
                                     <PopoverCloseButton />
-                                    <PopoverBody h={"400px"} overflowY={'scroll'}>
-                                        {getLocalData.map(item => (
+                                    <PopoverBody maxH={"350px"} overflowY={'auto'}>
+                                        {localData.map(item => (
                                             <Flex gap={5} alignItems={'center'} marginBlock={5}>
                                                 <Box>
                                                     <Image w={100} src={item.img} />
@@ -207,11 +227,7 @@ const CarProductDetail = () => {
                                                     </Link>
                                                     <Text fontSize={"16px"} color={"gray.500"} fontWeight={500}>{item.quantity} X &#8377;{item.price}</Text>
                                                 </Box>
-                                                <Text cursor={'pointer'} onClick={() => {
-                                                    const updatedLocallist = getLocalData.filter(item => item.id !== id);
-                                                    localStorage.setItem("pruductData", JSON.stringify(updatedLocallist));
-                                                    
-                                                }}>x</Text>
+                                                <Text cursor={'pointer'} onClick={() => handleDeleteProduct(item.id)}>x</Text>
                                             </Flex>
                                         ))}
                                     </PopoverBody>
@@ -278,12 +294,21 @@ const CarProductDetail = () => {
                                     }}
                                     p={3}
                                     onClick={() => {
-                                        setQuantity(quantityCount + 1)
-                                        const updatedData = [...getLocalData];
-                                        if (updatedData.length > 0) {
-                                            updatedData[0].quantity = quantityCount + 1;
+                                        if(localData.length>0){
+                                            const updatedData = localData.map(item => {
+                                                if (item.id === id) {
+                                                    const newQuantity = item.quantity + 1;
+                                                    setQuantity(newQuantity)
+                                                    return { ...item, quantity: newQuantity };
+                                                }
+                                                return item;
+                                            });
                                             localStorage.setItem("pruductData", JSON.stringify(updatedData));
+                                            setLocalData(updatedData);
+                                        }else{
+                                            setQuantity(quantityCount+1)
                                         }
+                                        
                                     }}
                                     fontSize={18}
                                     _disabled={quantityCount > 5}
@@ -294,8 +319,8 @@ const CarProductDetail = () => {
                                     fontSize={18}
                                     borderLeft={'1px solid #333'}
                                     borderRight={'1px solid #333'}
-                                >{quantityCount}</TagLabel>
-
+                                >{localData.find(item => item.id === id)?.quantity || quantityCount}</TagLabel>
+                                <></>
                                 <Button
                                     bg={'transparent'}
                                     fontWeight={900}
@@ -306,39 +331,37 @@ const CarProductDetail = () => {
                                     isDisabled={quantityCount <= 1}
                                     p={3}
                                     onClick={() => {
-                                        setQuantity(quantityCount - 1)
-                                        const updatedData = [...getLocalData];
-                                        if (updatedData.length > 0) {
-                                            updatedData[0].quantity = quantityCount - 1;
+                                        if(localData.length>0){
+                                            const updatedData = localData.map(item => {
+                                                if (item.id === id) {
+                                                    const newQuantity = item.quantity - 1;
+                                                    return { ...item, quantity: Math.max(newQuantity, 1) };
+                                                }
+                                                return item;
+                                            });
                                             localStorage.setItem("pruductData", JSON.stringify(updatedData));
+                                            setLocalData(updatedData);
+                                        }
+                                        else{
+                                            setQuantity(quantityCount-1)
                                         }
                                     }}
                                     fontSize={18}
                                 >-</Button>
                             </Tag>
+                            <></>
                             <Box>
                                 <Button
                                     p={6}
+                                    ml={5}
                                     fontWeight={500}
                                     bg={'black'}
                                     color={'white'}
                                     _hover={{ bg: "#E9B10B" }}
                                     borderRadius={2}
-                                    width={200}
+                                    width={300}
                                     onClick={handleAddCard}
                                 >ADD TO CARD</Button>
-                            </Box>
-                            <Box>
-                                <Button
-                                    p={6}
-                                    fontWeight={500}
-                                    bg={'black'}
-                                    color={'white'}
-                                    _hover={{ bg: "#28A871" }}
-                                    borderRadius={2}
-                                    width={200}
-                                    onClick={handleBuyNow}
-                                >BUY NOW</Button>
                             </Box>
                         </Flex>
 

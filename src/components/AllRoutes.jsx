@@ -26,7 +26,7 @@ const AllRoutes = () => {
                     <WishList/>
                 </PrivateRoute>
             } />
-            <Route path='/custom-plate' element={
+            <Route path='/custom-plate/:id' element={
                 <PrivateRoute>
                     <CustomPlate/>
                 </PrivateRoute>

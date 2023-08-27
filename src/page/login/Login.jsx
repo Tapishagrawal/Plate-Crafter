@@ -4,8 +4,9 @@ import React, { useContext } from 'react'
 import { Navigate } from 'react-router-dom'
 const Login = () => {
     const {isAuth, login} = useContext(AuthContext)
+        
     if(isAuth){
-        return <Navigate to="/"/>
+        return window.history.back();
     }
     return (
         <Button onClick={login}>toggle</Button>
