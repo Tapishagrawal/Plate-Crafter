@@ -4,8 +4,10 @@ import styles from './Home.module.css'
 import ReviewSlider from "../../components/ReviewSlider"
 import { PhoneIcon } from "@chakra-ui/icons"
 import Footer from "../../components/Footer"
+import { useNavigate } from "react-router-dom"
 
 const Home = () => {
+    const navigate = useNavigate()
     return (
         <>
             <Slider />
@@ -40,7 +42,7 @@ const Home = () => {
                         <Text fontSize={"15px"} fontWeight={500} color={"#709255"}>Service</Text>
                         <Heading color={"#F59B00"}>Buy Premium Quality Plates From <Text>Pates Crafters</Text></Heading>
                         <Text marginBlock={2} color={"#5C5C5C"} textAlign={"justify"} >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti totam soluta cumque minima facere autem amet quis distinctio voluptates, corporis beatae accusamus neque modi quidem voluptate tenetur sunt velit alias.</Text>
-                        <Button colorScheme="yellow" marginRight={2}>Order Now</Button>
+                        <Button colorScheme="yellow" marginRight={2} onClick={()=>{navigate("/bike-plate")}}>Order Now</Button>
                         <Button colorScheme="yellow" variant="outline">Learn More</Button>
                     </Box>
 

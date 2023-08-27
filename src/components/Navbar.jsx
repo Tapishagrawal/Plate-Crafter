@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styles from "./Navbar.module.css"
 import { NavLink } from "react-router-dom"
 import logo from "../img/logo.png"
-import { Flex, HStack, Heading, Spacer, Container, Image, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, useDisclosure, DrawerCloseButton, Box } from '@chakra-ui/react'
+import { Flex, HStack, Heading, Spacer, Container, Image, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, useDisclosure, DrawerCloseButton, Box, position } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import { FaRegHeart } from "react-icons/fa6";
 
@@ -68,8 +68,21 @@ const Navbar = () => {
                     </HStack>
                     <Spacer />
                     <Flex align={'center'} gap={5}>
-                        <NavLink to={'/wish-list'}>
+                        <NavLink to={'/wish-list'} style={{position:"relative"}} >
                             <FaRegHeart style={{color:"white", fontSize:"20px", cursor:"pointer"}}/>
+                            <Box 
+                                position={"absolute"}
+                                bg={"yellow.600"}
+                                top={"-1px"}
+                                right={"-5px"}
+                                p={"0px 5px"}
+                                fontWeight={500}
+                                color={"white"}
+                                fontSize={"0.7rem"}
+                                borderRadius={50}
+                                w={1}
+                                h={2}
+                            ></Box>
                         </NavLink>
                         <Heading>
                             <Image w={"90px"} src={logo} alt="" />
