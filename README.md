@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+<h1>MoneyMingle (PayWise-From CaseStudy)</h1>
+MoneyMingle is a financial application that helps users quickly convert their Money to other currencies. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### The Goal:
+The goal of Plate Crafters is to provide a convenient and user-friendly platform for make licenses .I are working on this project to make uniq primium, more affordable, and more for users.
 
-## Available Scripts
+### Design Process:
+To help us prioritize and understand the user's needs, and challenges, We designed Feedback form which will help us every time to go through user expectations and needs regarding this website.
 
-In the project directory, you can run:
 
-### `npm start`
+### Outcome: 
+I grow and learnt a lot while working on this product, how to collaborate efficiently as a design team and work within timeline to deliver Plate Crafters.
+I also learnt on designing with users feedback insteaad of assumption and it increased our work progress.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<h1>Teck Stack :</h1>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+ <li>REACT</li>
+  <li>JSX</li>
+  <li>SWIPER JS</li>
+  <li>SEEWT ALERT</li>
+  <li>CHARA UI</li>
+  <li>LocalStorage</li>
+  <li>Mock Servers</li>
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
+# More Info :
 
-### `npm run build`
+### This website is made from CaseStudy of Expert Fix :  https://www.behance.net/gallery/165978761/Bike-Website-Landing-Page-Ui-Design?tracking_source=search_projects%7Ctravelling+website
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Netlify link : 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Output :
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Home](./public/Images/home.png)
+![Add Card](./public/Images/Add-Card.png)
+![car-product](./public/Images/car-product.png)
+![customize-plate](./public/Images/Customize-plate.png)
+![Place-Oerder](./public/Images/PLaceOrder.png)
+![Single-card](./public/Images/Single-Card.png)
+![Slider](./public/Images/Slider.png)
+![Wish-List](./public/Images/WishList.png)
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<h1>Features :</h1>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+ <li>Login</li>
+  <li>Sign Up</li>
+  <li>Logout</li>
+  <li>View Single Card</li>
+  <li>Customize Plate</li>
+  <li>Filtering</li>
+  <li>Sorting</li>
+  <li>CURD Operation</li>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Given name : futuristic-amount-4935
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+[fw27_177-Tapish Agrawal](https://github.com/Tapishagrawal)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
