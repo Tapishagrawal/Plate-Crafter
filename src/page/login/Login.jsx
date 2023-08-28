@@ -2,7 +2,7 @@ import { Box, Button, Flex, FormControl, HStack, Heading, Image, Input, Text, VS
 import { AuthContext } from '../../context/AuthContextProvider'
 import React, { useContext } from 'react'
 import { Link as RoutLink, Navigate, useNavigate } from 'react-router-dom'
-import { color } from 'framer-motion'
+
 import { useState } from 'react'
 const Login = () => {
     const {isAuth, login} = useContext(AuthContext)

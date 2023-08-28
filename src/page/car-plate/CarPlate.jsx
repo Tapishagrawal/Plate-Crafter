@@ -26,6 +26,7 @@ import CarCard from '../../components/CarCard';
 import Footer from '../../components/Footer'
 import { filterCardReducer } from './carReducer';
 
+
 const CarPlate = () => {
     const [sortBy, setSortBy] = useState("");
     const [orderBy, setOrderBy] = useState("");

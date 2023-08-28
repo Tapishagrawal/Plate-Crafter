@@ -17,7 +17,7 @@ const AuthContextProvider = ({ children }) => {
 
     const login = (userName, password) => {
         const match = authdata.find(
-            (user) => user.userName === userName && user.password === password
+            (user) => user.userName === userName && user.password == password
         );
 
         if (match) {
