@@ -44,7 +44,7 @@ const CustomPlate = () => {
         getCustomerPLateDetail.push(updateState)
         localStorage.setItem("customer_plate_detail",JSON.stringify(getCustomerPLateDetail))
         dispatch({type:"RESET_FORM_DETAILS"})
-        // navigate("/placeOrder")
+        navigate("/add-card")
     }
     const navigateBack = () => {
         window.history.back();
@@ -159,8 +159,13 @@ const CustomPlate = () => {
                             <ModalCloseButton />
                             <ModalBody pb={6}>
                                 <FormControl>
-                                    <FormLabel>Full name</FormLabel>
-                                    <Input ref={initialRef} type='text' value={fullName} name='fullName' placeholder='Enter First name' onChange={handleChangeFormField}/>
+                                    <FormLabel>First name</FormLabel>
+                                    <Input ref={initialRef} type='text' value={fullName} name='fName' placeholder='Enter First name' onChange={handleChangeFormField}/>
+                                </FormControl>
+
+                                <FormControl>
+                                    <FormLabel>Last name</FormLabel>
+                                    <Input type='text' value={fullName} name='lName' placeholder='Enter Last name' onChange={handleChangeFormField}/>
                                 </FormControl>
 
                                 <FormControl mt={4}>

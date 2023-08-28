@@ -62,6 +62,7 @@ const CarProductDetail = () => {
     const toast = useToast()
     const [addToWishList, setAddToWishList] = useState(false)
     const initRef = useRef()
+    const [wishData, setWishData] = useState(getWishListData)
 
     const fetchData = async (id) => {
         dispatch({ type: "LOEADING_STATUS" })
@@ -110,31 +111,7 @@ const CarProductDetail = () => {
             navigate("/custom-plate")
     }
 
-    const handleAddIntoWishList = () => {
-        const isDuplicate = getWishListData.some(existId => id === existId.id)
-        if (!isDuplicate || !addToWishList) {
-            toast({
-                title: `Added Into Wishlist.`,
-                position: "top",
-                isClosable: true,
-                status: "success"
-            })
-            getWishListData.push(state.data)
-            state.data.id = id
-            localStorage.setItem("wish-list", JSON.stringify(getWishListData))
-            setAddToWishList(!addToWishList)
-        } else if (isDuplicate) {
-            toast({
-                title: `Remove Prodcut.`,
-                position: "top",
-                isClosable: true,
-                status: "error"
-            })
-            const updatedWishlist = getWishListData.filter(item => item.id !== id);
-            localStorage.setItem("wish-list", JSON.stringify(updatedWishlist));
-            setAddToWishList(!addToWishList);
-        }
-    }
+    
 
     const handleDeleteProduct = (id) => {
         const updatedLocallist = localData.filter(item => item.id !== id);
@@ -142,13 +119,36 @@ const CarProductDetail = () => {
         setLocalData(updatedLocallist);
 
     }
+    const handleAddIntoWishList = () => {
+        const isDuplicate = wishData.some(existId => Number(id) === existId.id)
+        if (!isDuplicate) {
+            toast({
+                title: `Added Into Wishlist.`,
+                position: "top",
+                isClosable: true,
+                status: "success"
+            })
+            const updatedWishList = [
+                ...wishData, {...state.data}
+            ]
+            localStorage.setItem("wish-list", JSON.stringify(updatedWishList))
+            setWishData(updatedWishList)
+            setAddToWishList(!addToWishList)
+        } else{
+            toast({
+                title: `Already in you wishlist.`,
+                position: "top",
+                isClosable: true,
+                status: "error"
+            })
+        }
+    }
 
     useEffect(() => {
 
         const updatedLocalData = JSON.parse(localStorage.getItem("pruductData")) || [];
         setLocalData(updatedLocalData);
         setQuantity(1)
-
         fetchData(id)
 
     }, [id])
@@ -371,7 +371,7 @@ const CarProductDetail = () => {
                             display={'inline-block'}
                             marginBlock={7}
                             // '#4A5568'
-                            color={addToWishList && getWishListData.some(existId => id === existId.id) ? "red" : '#4A5568'}
+                            color={wishData.find(existId => id == existId.id) ? "red" : '#4A5568'}
                             transition={"color 0.2s"}
                             _hover={{
                                 color: "#E9B10B",

@@ -1,9 +1,10 @@
 import { Box, Button, HStack, Image, Tag, TagLabel, TagLeftIcon, Text, transition } from '@chakra-ui/react'
 import React from 'react'
-import { FaStar, FaRegHeart,FaShoppingCart } from "react-icons/fa";
+import { FaStar, FaRegHeart,FaHeart,FaShoppingCart } from "react-icons/fa";
 import { Link } from 'react-router-dom';
-
+const getWishListData = JSON.parse(localStorage.getItem("wish-list")) || []
 const CarCard = ({id, img, title, price, rating}) => {
+    
     return (
         <>      
             
@@ -15,7 +16,7 @@ const CarCard = ({id, img, title, price, rating}) => {
                     <Text color={'green.500'} fontWeight={600} fontSize={20}>&#8377; {price}</Text>
                 </Box>
                 <Box marginBlock={2}>
-                    <Button marginRight={5} colorScheme='pink' variant={'outline'}><FaRegHeart/></Button>
+                    <Button marginRight={5} colorScheme='pink' variant={'outline'}>{getWishListData.find(existId => id == existId.id)? <FaHeart/>:<FaRegHeart/>}</Button>
                     <Link to={`/carProductDetail/${id}`}>
                         <Button colorScheme='teal'><Tag bg={'transparent'} color={'gray.100'}><FaShoppingCart/></Tag> Order Now</Button>
                     </Link>

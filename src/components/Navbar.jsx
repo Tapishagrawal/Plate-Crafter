@@ -1,20 +1,23 @@
 import React, { useState } from 'react'
 import styles from "./Navbar.module.css"
-import { NavLink } from "react-router-dom"
+import { NavLink , useNavigate} from "react-router-dom"
 import logo from "../img/logo.png"
-import { Flex, HStack, Heading, Spacer, Container, Image, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, useDisclosure, DrawerCloseButton, Box, position } from '@chakra-ui/react'
+import { Flex, HStack, Heading, Spacer, Container, Image, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, useDisclosure, DrawerCloseButton, Box, position, Button } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import { FaRegHeart } from "react-icons/fa6";
+import {AuthContext} from "../context/AuthContextProvider"
+import { useContext } from 'react'
 
 const links = [
     { path: "/", text: "Home" },
     { path: "/car-plate", text: "Car Plates" },
     { path: "/bike-plate", text: "Bike Plates" },
-    { path: "/registration", text: "Registration" },
 ]
 
 const Navbar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const navigate = useNavigate()
+    const {isAuth, logout} = useContext(AuthContext)
     return (
         <>
             <Container
@@ -84,6 +87,10 @@ const Navbar = () => {
                                 h={2}
                             ></Box>
                         </NavLink>
+                        {isAuth ? <Button onClick={()=>logout()} color={"White"} _hover={{color:"#000", bg:"#fff"}} variant={"outline"}>Logout</Button>
+                                :
+                                <Button onClick={()=>navigate("/login")} color={"White"} _hover={{color:"#000", bg:"#fff"}} variant={"outline"}>Login</Button>
+                        }
                         <Heading>
                             <Image w={"90px"} src={logo} alt="" />
                         </Heading>
