@@ -33,7 +33,7 @@ const Login = () => {
                                 <Input onChange={(e)=>setuserName(e.target.value)} name="userName" value={userName} border={"1px solid #3333"} placeholder='Enter User Name' type='text'/>
                             </FormControl>
                             <FormControl>
-                                <Input onChange={(e)=>setPassword(e.target.value)} name="password" value={password} border={"1px solid #3333"} placeholder='Enter Password' type='text'/>
+                                <Input onChange={(e)=>setPassword(e.target.value)} name="password" value={password} border={"1px solid #3333"} placeholder='Enter Password' type='password'/>
                             </FormControl>
                         </VStack>
                         <Box mt={"40px"} textAlign={'center'}>
